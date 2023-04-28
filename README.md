@@ -9,9 +9,10 @@ Healthify is a project consisting of a backend and frontend component for bookin
 
 ### Setup and Run Backend
 
-1. Open the `healthify` project folder in IntelliJ IDEA.
-2. Locate the main class or entry point of the backend application.
-3. Right-click on the main class and select `Run` or `Debug` to execute the backend application.
+1.Start mysql and create database name healthify .
+2. Open the `healthify` project folder in IntelliJ IDEA.
+3. Locate the main class or entry point of the backend application.
+4. Right-click on the main class and select `Run` or `Debug` to execute the backend application.
 
 ## Frontend
 
