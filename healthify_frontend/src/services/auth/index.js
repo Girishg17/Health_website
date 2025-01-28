@@ -2,11 +2,17 @@ import { initializeApp } from "firebase/app";
 import {
     createUserWithEmailAndPassword,
     getAuth,
-    signInWithEmailAndPassword,
+    signInWithEmailAndPassword,sendPasswordResetEmail
 } from "firebase/auth";
 
 const firebaseConfig = {
-  // Your web app's Firebase configuration
+    apiKey: "AIzaSyB-yfvjTEkSJL3eWl9eZJoRweBYeqWkChU",
+    authDomain: "healthify-4ca71.firebaseapp.com",
+    projectId: "healthify-4ca71",
+    storageBucket: "healthify-4ca71.firebasestorage.app",
+    messagingSenderId: "99785722988",
+    appId: "1:99785722988:web:e73577642f73da9b80dc49",
+    measurementId: "G-FSCGXNJ0Q3"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -30,6 +36,16 @@ export function signIn(email, password, callback) {
         })
         .catch((error) => {
             callback(error);
+        });
+}
+
+export function forgotPassword(email, callback) {
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+            callback(null); // Email sent successfully
+        })
+        .catch((error) => {
+            callback(error); // Error sending reset email
         });
 }
 

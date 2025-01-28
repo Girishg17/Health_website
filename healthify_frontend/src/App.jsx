@@ -11,12 +11,14 @@ import PrivateRouteDoctor from './components/PrivateRouteDoctor.jsx';
 import RestrictedRoute from './components/RestrictedRoute.jsx';
 import DoctorViewAppointment from './pages/DoctorViewAppointment.jsx';
 import DoctorHome from './pages/DoctorHome.jsx';
+import Forgot from './pages/Forgot.jsx';
 
 export default function App() {
     return (
         <Routes>
             <Route path="/" element={<RestrictedRoute><Login /></RestrictedRoute>} />
             <Route path="/signup" element={<RestrictedRoute><SignUp /></RestrictedRoute>} />
+            <Route path="/forgot" element={<RestrictedRoute><Forgot/></RestrictedRoute>}/>
             <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
             <Route path="/bookAppointment" element={<PrivateRoute><BookAppointment/></PrivateRoute>} />
             <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />

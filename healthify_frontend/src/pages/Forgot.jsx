@@ -11,15 +11,16 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import background from '../assets/login.jpg';
-import { getUserId, getUserType, signIn } from '../services/auth';
+import { forgotPassword, getUserId, getUserType, signIn } from '../services/auth';
 import LinearProgress from '@mui/material/LinearProgress';
 import Message from '../components/Message';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const theme = createTheme();
 
-export default function login() {
+export default function Forgot() {
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,16 +32,35 @@ export default function login() {
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    signIn(data.get('email'), data.get('password'), (err) => {
-      setLoading(false);
-      if(err){
-        setMessage('Authentication failed, Please check your credentials');
+   forgotPassword(data.get('email'),(error) => {
+    if (error) {
+        setMessage('Error while sending password reset email!.');
         setSeverity('error');
         setOpen(true);
-        return;
-      }
-      navigateToHome();
-    });
+        setLoading(false);
+        return
+    } else {
+        setMessage('Email has been sent your mail.Please check your Inbox!.');
+       
+        
+    }
+    setOpen(true);
+    setLoading(false);
+    setTimeout(()=>{
+        navigate('/');
+    },3000);
+    
+});
+    // signIn(data.get('email'), data.get('password'), (err) => {
+    //   setLoading(false);
+    //   if(err){
+    //     setMessage('Authentication failed, Please check your credentials');
+    //     setSeverity('error');
+    //     setOpen(true);
+    //     return;
+    //   }
+      
+    // });
   };
 
   const navigateToHome = () => {
@@ -101,27 +121,17 @@ export default function login() {
                 autoComplete="email"
                 autoFocus
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Update Password
               </Button>
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
-                  <Link to="/forgot" variant="body2">
+                  <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
@@ -130,7 +140,7 @@ export default function login() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
             </Box>
           </Box>
         </Grid>
